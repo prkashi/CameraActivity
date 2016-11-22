@@ -1,8 +1,10 @@
 package com.example.punit.requestpermission;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -13,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     Intent inte = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivity(inte);
+                    startActivityForResult(inte,1888);
                 } else {
 
                     Log.d("hi", "hi");
@@ -55,5 +59,13 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intentShown){
+            if(requestCode==1888 && resultCode == Activity.RESULT_OK){
+                Bitmap photo = (Bitmap) intentShown.getExtras().get("intentShown");
+                image.setImageBitmap(photo);
+             }
     }
 }
