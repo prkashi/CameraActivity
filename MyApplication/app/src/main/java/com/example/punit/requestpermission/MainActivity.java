@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity {
-
+//
     Button button;
     ImageView image;
 
